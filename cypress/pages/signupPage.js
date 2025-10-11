@@ -17,6 +17,10 @@ class SignUpPage{
     inputCity = '//input[@data-qa="city"]'
     inputZipCode = '//input[@data-qa="zipcode"]'
     inputMobileNumber = '//input[@data-qa="mobile_number"]'
+    createBtn = '//button[@data-qa="create-account"]'
+    accountVerify = "//b[text()='Account Created!']";
+    continueBtn = '//a[@data-qa="continue-button"]';
+    verifyLogin = "//a[text()=' Logout']";
 
     visit(){
         cy.visit(this.url);
@@ -71,7 +75,7 @@ class SignUpPage{
     }
 
     fillCountry(country){
-        cy.xpath(this.inputCountry).type(country);
+        cy.xpath(this.inputCountry).select(country);
     }
 
     fillState(State){
@@ -90,13 +94,21 @@ class SignUpPage{
         cy.xpath(this.inputMobileNumber).type(number);
     }
 
+    createAccount(){
+        cy.xpath(this.createBtn).click();
+    }
 
+    verification(){
+        cy.xpath(this.accountVerify).should('be.visible');
+    }
 
+    continueDashboard (){
+        cy.xpath(this.continueBtn).click();
+    }
 
-
-
-
-
+    accountLogin(){
+        cy.xpath(this.verifyLogin).should('be.visible');
+    }
 }
 
 export default SignUpPage;
