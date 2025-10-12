@@ -1,4 +1,4 @@
-name: Daily and Push Cypress Test Run for Automation Exercise WebAPp
+name: Daily and Push Cypress Test Run
 
 on:
   push:
