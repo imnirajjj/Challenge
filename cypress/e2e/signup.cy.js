@@ -1,4 +1,4 @@
-import SignUpPage from "../pages/signUpPage"; // fixed typo
+import SignUpPage from "../pages/signupPage"; 
 import { faker } from '@faker-js/faker';
 
 describe("Signup Flow of Automation Exercise", () => {
