@@ -1,10 +1,10 @@
 name: Cypress CI/CD Pipeline
 
 on:
-  push:                       # Runs on each push
+  push:                       # Run on every push
     branches:
       - "**"
-  schedule:                   # Runs daily at 12:00 PM UTC
+  schedule:                   # Run every day at 12:00 PM (noon) UTC
     - cron: '0 12 * * *'
 
 jobs:
@@ -15,10 +15,10 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v4
 
-      - name: Setup Node.js
+      - name: Setup Node.js (use stable version for Cypress)
         uses: actions/setup-node@v4
         with:
-          node-version: 18
+          node-version: 18.18.2   # ✅ Safe version before Node loader change
 
       - name: Install dependencies
         run: npm ci
@@ -27,16 +27,20 @@ jobs:
         run: npx cypress verify
 
       - name: Run Cypress tests
-        run: npx cypress run
+        env:
+          # Optional: reduce flakiness for Electron runs
+          CYPRESS_CACHE_FOLDER: ~/.cache/Cypress
+        run: |
+          npx cypress run --browser chrome --headless
 
-      - name: Upload Cypress screenshots (if tests fail)
+      - name: Upload Cypress screenshots (on failure)
         if: failure()
         uses: actions/upload-artifact@v4
         with:
           name: cypress-screenshots
           path: cypress/screenshots
 
-      - name: Upload Cypress videos
+      - name: Upload Cypress videos (always)
         if: always()
         uses: actions/upload-artifact@v4
         with:
