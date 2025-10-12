@@ -13,11 +13,9 @@ class AuthFlowPage{
         cy.xpath(this.clickBtn).click();
     }
 
-
     fillEmail(email){
         cy.xpath(this.inputEmail).type(email);
     }
-
 
     fillPassword(password){
         cy.xpath(this.inputPassword).type(password);

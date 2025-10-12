@@ -1,4 +1,4 @@
-import AuthFlowPage from "../pages/authFlowPage";
+import AuthFlowPage from "../pages/logoutPage";
 
 describe("login Flow of Automation Exercise", () => {
     it('User should be able to signup in the system', () => {
