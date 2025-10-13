@@ -1,16 +1,16 @@
 import BrowsingPage from "../pages/productBrowsingPage";
 
-describe("Dashboard Tests", () => {
+describe("roduct Browsing & Filtering", () => {
     let dashboard;
 
     // Reuse login session for all tests
     before(() => {
         cy.loginWithFixture(); 
-        console.log("✅ Logged in using fixture");
+        cy.log("Logged in using fixture");
         dashboard = new BrowsingPage();
     });
 
-    it("Product Browsing & Filtering", () => {
+    it("Verify if user can browse product Browsing & Filter it", () => {
         dashboard.clickProduct();
         dashboard.expandWomenPanel();
         dashboard.clickDress();

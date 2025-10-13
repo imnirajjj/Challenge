@@ -1,7 +1,7 @@
 import AuthFlowPage from "../pages/logoutPage";
 
-describe("login Flow of Automation Exercise", () => {
-    it('User should be able to signup in the system', () => {
+describe("log Out  Flow of Automation Exercise", () => {
+    it('First User should be able to login in the system with the signup credentails', () => {
         cy.fixture('testData').then((data) => {
             const login = new AuthFlowPage();
             login.visit();
@@ -9,6 +9,7 @@ describe("login Flow of Automation Exercise", () => {
             login.fillEmail(data.email);
             login.fillPassword(data.password);
             login.submit();
+            //then user should be able to login the system
         });
     });
 });

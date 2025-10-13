@@ -2,7 +2,7 @@ import SignUpPage from "../pages/signupPage";
 import { faker } from '@faker-js/faker';
 
 describe("Signup Flow of Automation Exercise", () => {
-    it('User should be able to signup in the system', () => {
+    it('User should be able to signup in the system with valid data', () => {
         const signup = new SignUpPage();
         const randomEmail = faker.internet.email();
         const randomName = faker.person.fullName();
@@ -13,7 +13,7 @@ describe("Signup Flow of Automation Exercise", () => {
         const randomState = faker.location.state();
         const randomCity = faker.location.city();
         const randomZipCode = faker.location.zipCode();
-        const randomMobileNumber = faker.phone.number('+###########'); // e.g. +9779812345678
+        const randomMobileNumber = faker.phone.number('+###########');
 
         cy.writeFile('cypress/fixtures/testData.json', {
             email: randomEmail,
@@ -27,7 +27,6 @@ describe("Signup Flow of Automation Exercise", () => {
             zipCode: randomZipCode,
             mobile: randomMobileNumber
         });
-
 
         signup.visit();
         signup.clickSignup();

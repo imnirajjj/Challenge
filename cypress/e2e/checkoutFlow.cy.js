@@ -1,17 +1,16 @@
 import CheckOutPage from "../pages/checkoutPage";
 import { faker } from '@faker-js/faker';
 
-describe("Dashboard Tests", () => {
+describe("Checkout Flow with Fake Payment ", () => {
     let dashboard;
 
-    // Reuse login session for all tests
     before(() => {
         cy.loginWithFixture(); 
-        console.log("✅ Logged in using fixture");
+        cy.log("Logged in using fixture");
         dashboard = new CheckOutPage();
     });
 
-    it("Checkout Flow with Fake Payment ", () => {
+    it("verify if user can Checkout the cart item with Fake Payment", () => {
         const randomCardName = faker.person.fullName();
         const randomCardNumber = faker.finance.creditCardNumber(); // Generates a credit card number
         const randomCVC = faker.finance.creditCardCVV();           // Generates a CVC

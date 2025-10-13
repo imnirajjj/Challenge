@@ -12,8 +12,8 @@ class CartPage {
     findCart ="//a[text()=' Cart']";
 
     clickProduct() {
-        cy.xpath(this.findProduct).click();
-        console.log("🛍️ Navigated to Products page");
+        cy.xpath(this.findProduct).click()
+        .log("Navigated to Products page");
     }
 
     // Click first product’s "View Product"
@@ -22,8 +22,8 @@ class CartPage {
           .first()
           .find("a")
           .contains("View Product")
-          .click();
-        console.log("👁️ Clicked on first product's View Product link");
+          .click()
+          .log("Clicked on first product's View Product link");
     }
 
 
@@ -74,8 +74,6 @@ class CartPage {
         cy.xpath(this.findCart).click();
         console.log("🛍️ Navigated to Cart page");
     }
-
-
 }
 
 export default CartPage;

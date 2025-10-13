@@ -12,8 +12,8 @@ class CheckOutPage {
 
     // Navigate to Products page
     clickCart() {
-        cy.xpath(this.findCart).click();
-        console.log("🛍️ Navigated to Cart page");
+        cy.xpath(this.findCart).click()
+        .log("Navigated to Cart page");
     }
 
     clickCheckOut(){

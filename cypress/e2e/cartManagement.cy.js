@@ -1,17 +1,16 @@
 import CartPage from "../pages/cartPage";
 
-describe("Dashboard Tests", () => {
+describe("Cart and Quantity Management", () => {
     let dashboard;
 
-    // Reuse login session for all tests
     before(() => {
         cy.loginWithFixture(); 
-        console.log("✅ Logged in using fixture");
+        cy.log("Logged in using fixture");
         dashboard = new CartPage();
     });
 
 
-    it("Cart and Quantity Management", () => {
+    it("Verify if user can add product to Cart and add the Quantity", () => {
         dashboard.clickProduct();
         dashboard.addItem();
         dashboard.addItemTwo();
