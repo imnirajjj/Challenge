@@ -72,7 +72,7 @@ class CartPage {
     // Navigate to Products page
     clickCart() {
         cy.xpath(this.findCart).click();
-        console.log("🛍️ Navigated to Cart page");
+        console.log("Navigated to Cart page");
     }
 }
 

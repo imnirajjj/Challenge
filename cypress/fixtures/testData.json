@@ -1,12 +1,25 @@
 {
-  "email": "Ella_Jakubowski75@gmail.com",
-  "name": "Dr. Dexter Jerde",
-  "password": "ID8cJwcgzzmre9l",
-  "firstName": "Darryl",
-  "lastName": "Bechtelar",
-  "address": "1132 E Main",
-  "state": "Kentucky",
-  "city": "Stokeshaven",
-  "zipCode": "85823",
-  "mobile": "1-966-914-3355 x21465"
+  "signupData": {
+    "email": "Ansley_Weissnat@yahoo.com",
+    "name": "Ms. Beverly Lind",
+    "password": "QG3RU43NQd",
+    "firstName": "Marilie",
+    "lastName": "Walsh",
+    "address": "871 Ralph Shoal",
+    "state": "Washington",
+    "city": "Port Jamiecester",
+    "zipCode": "42787",
+    "mobile": "1-614-307-0349 x99492",
+    "days": "3",
+    "month": "June",
+    "year": "2020",
+    "country": "Canada"
+  },
+  "checkoutData": {
+    "cardName": "Carolyn Greenholt III",
+    "cardNumber": "3529-2702-0953-9860",
+    "cardCVC": "963",
+    "cardMonth": "09",
+    "cardYear": "2029"
+  }
 }

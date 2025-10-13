@@ -1,22 +1,23 @@
 import BrowsingPage from "../pages/productBrowsingPage";
 
-describe("roduct Browsing & Filtering", () => {
+describe("Product Browsing & Filtering", () => {
     let dashboard;
 
-    // Reuse login session for all tests
     before(() => {
         cy.loginWithFixture(); 
-        cy.log("Logged in using fixture");
+        cy.log("Logged in using fixture data");
         dashboard = new BrowsingPage();
     });
 
     it("Verify if user can browse product Browsing & Filter it", () => {
+    cy.fixture('fixedData').then((data) => {
         dashboard.clickProduct();
         dashboard.expandWomenPanel();
         dashboard.clickDress();
-        // dashboard.verifyFilteredProducts("Dress");
+        dashboard.verifyFilteredProducts(data.filterproduct);
         dashboard.clickFirstProduct();
-        dashboard.verifyProductDetails("Dress");
+        dashboard.verifyProductDetails(data.filterproduct);
     });
+});
 });
 

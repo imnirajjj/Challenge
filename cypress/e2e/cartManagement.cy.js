@@ -9,14 +9,14 @@ describe("Cart and Quantity Management", () => {
         dashboard = new CartPage();
     });
 
-
     it("Verify if user can add product to Cart and add the Quantity", () => {
+        cy.fixture('fixedData').then((data) => {
         dashboard.clickProduct();
         dashboard.addItem();
         dashboard.addItemTwo();
         dashboard.addItemThree();
         dashboard.clickFirstProduct();
-        dashboard.fillQuantity('3');
+        dashboard.fillQuantity(data.quantity);
     });
 });
-
+});

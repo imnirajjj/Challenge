@@ -5,22 +5,25 @@ class SignUpPage{
     inputEmail = '//input[@data-qa="signup-email"]';
     radioBtn = '//input[@id="id_gender1"]';
     submitBtn = '//button[@data-qa="signup-button"]';
-    inputPassword = '//input[@data-qa="password"]'
-    inputDays = '//select[@data-qa="days"]'
-    inputMonth = '//select[@data-qa="months"]'
-    inputYear = '//select[@data-qa="years"]'
-    inputFirstName = '//input[@data-qa="first_name"]'
-    inputLastName = '//input[@data-qa="last_name"]'
-    inputAddress = '//input[@data-qa="address"]'
-    inputCountry = '//select[@data-qa="country"]'
-    inputState = '//input[@data-qa="state"]'
-    inputCity = '//input[@data-qa="city"]'
-    inputZipCode = '//input[@data-qa="zipcode"]'
-    inputMobileNumber = '//input[@data-qa="mobile_number"]'
-    createBtn = '//button[@data-qa="create-account"]'
+    inputPassword = '//input[@data-qa="password"]';
+    inputDays = '//select[@data-qa="days"]';
+    inputMonth = '//select[@data-qa="months"]';
+    inputYear = '//select[@data-qa="years"]';
+    inputFirstName = '//input[@data-qa="first_name"]';
+    inputLastName = '//input[@data-qa="last_name"]';
+    inputAddress = '//input[@data-qa="address"]';
+    inputCountry = '//select[@data-qa="country"]';
+    inputState = '//input[@data-qa="state"]';
+    inputCity = '//input[@data-qa="city"]';
+    inputZipCode = '//input[@data-qa="zipcode"]';
+    inputMobileNumber = '//input[@data-qa="mobile_number"]';
+    createBtn = '//button[@data-qa="create-account"]';
     accountVerify = "//b[text()='Account Created!']";
     continueBtn = '//a[@data-qa="continue-button"]';
     verifyLogin = "//a[text()=' Logout']";
+
+    // Dynamic locator for dashboard username
+    dashboardUserName = (name) => `//b[text()='${name}']`;
 
     visit(){
         cy.visit(this.url);
@@ -50,16 +53,16 @@ class SignUpPage{
         cy.xpath(this.inputPassword).type(password);
     }
 
-    fillDays(Days){
-        cy.xpath(this.inputDays).select(Days);
+    fillDays(days){
+        cy.xpath(this.inputDays).select(days);
     }
 
-    fillMonth(Month){
-        cy.xpath(this.inputMonth).select(Month);
+    fillMonth(month){
+        cy.xpath(this.inputMonth).select(month);
     }
 
-    fillYear(Year){
-        cy.xpath(this.inputYear).select(Year);
+    fillYear(year){
+        cy.xpath(this.inputYear).select(year);
     }
 
     fillFirstName(firstname){
@@ -99,7 +102,11 @@ class SignUpPage{
     }
 
     verification(){
-        cy.xpath(this.accountVerify).should('be.visible');
+        cy.xpath(this.accountVerify)
+        .should('be.visible')
+        .then(($el) => {
+            cy.log("Account Created Message: " + $el.text());
+        });
     }
 
     continueDashboard (){
@@ -107,7 +114,19 @@ class SignUpPage{
     }
 
     accountLogin(){
-        cy.xpath(this.verifyLogin).should('be.visible');
+        cy.xpath(this.verifyLogin)
+        .should('be.visible')
+        .then(($el) => {
+            cy.log("Account Login Successful : " + $el.text() + " is visible");
+        });
+    }
+
+    verifyDashboardName(name){
+        cy.xpath(this.dashboardUserName(name))
+          .should('be.visible')
+          .then(($el) => {
+              cy.log("Dashboard shows signed-up user: " + $el.text());
+          });
     }
 }
 

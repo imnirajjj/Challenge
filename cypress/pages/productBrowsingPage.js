@@ -26,20 +26,20 @@ class BrowsingPage {
     }
 
     // Verify filtered products contain keyword
-    verifyFilteredProducts(keyword) {
-        cy.get(this.productList)
-          .its('length')
-          .should('be.gt', 0)
-          .each(($el, index) => {
-              cy.wrap($el)
-                .find('.productinfo p')
-                .invoke('text')
-                .then((text) => {
-                    expect(text.trim().toLowerCase()).to.include(keyword.toLowerCase());
-                    console.log(`Product ${index + 1}: ${text.trim()}`);
-                });
-          });
-    }
+      verifyFilteredProducts(keyword) {
+          cy.get(this.productList)
+            .should('have.length.greaterThan', 0)
+            .each(($el, index) => {
+                cy.wrap($el)
+                  .find('.productinfo p')
+                  .invoke('text')
+                  .then((text) => {
+                      expect(text.trim().toLowerCase()).to.include(keyword.toLowerCase());
+                      cy.log(`Product ${index + 1}: ${text.trim()}`);
+                  });
+            });
+      }
+
 
     // Click first product’s "View Product"
     clickFirstProduct() {
@@ -48,19 +48,19 @@ class BrowsingPage {
           .find("a")
           .contains("View Product")
           .click()
-          .log("Clicked on first product's View Product link");
+          .log("Clicked on first product");
     }
 
     // Verify product details
     verifyProductDetails(expectedNameKeyword) {
         cy.get(this.productName).should('contain.text', expectedNameKeyword)
-          .then(($el) => console.log(`Product Name Verified: ${$el.text()}`));
+          .then(($el) => cy.log(`Product Name Verified: ${$el.text()}`));
 
         cy.get(this.productPrice).should('exist')
-          .then(($el) => console.log(`Product Price Verified: ${$el.text()}`));
+          .then(($el) => cy.log(`Product Price Verified: ${$el.text()}`));
 
         cy.get(this.productAvailability).should('exist')
-          .then(($el) => console.log(`Product Availability Verified: ${$el.text()}`));
+          .then(($el) => cy.log(`Product Availability Verified: ${$el.text()}`));
     }
 }
 

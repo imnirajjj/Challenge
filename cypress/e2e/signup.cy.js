@@ -1,66 +1,59 @@
-import SignUpPage from "../pages/signupPage"; 
+import SignUpPage from "../pages/signupPage";
 import { faker } from '@faker-js/faker';
 
 describe("Signup Flow of Automation Exercise", () => {
-    it('User should be able to signup in the system with valid data', () => {
-        const signup = new SignUpPage();
-        const randomEmail = faker.internet.email();
-        const randomName = faker.person.fullName();
-        const randomPassword = faker.internet.password();
-        const randomFirstName = faker.person.firstName();
-        const randomLastName = faker.person.lastName();
-        const randomAddress = faker.location.streetAddress();
-        const randomState = faker.location.state();
-        const randomCity = faker.location.city();
-        const randomZipCode = faker.location.zipCode();
-        const randomMobileNumber = faker.phone.number('+###########');
+  it("User should be able to signup and see their name on the dashboard", () => {
+    cy.fixture('testData').then((data) => {
+      const signup = new SignUpPage();
 
-        cy.writeFile('cypress/fixtures/testData.json', {
-            email: randomEmail,
-            name: randomName,
-            password: randomPassword,
-            firstName: randomFirstName,
-            lastName: randomLastName,
-            address: randomAddress,
-            state : randomState,
-            city: randomCity,
-            zipCode: randomZipCode,
-            mobile: randomMobileNumber
-        });
+      // Faker-generated signup data
+      const signupData = {
+        email: faker.internet.email(),
+        name: faker.person.fullName(),
+        password: faker.internet.password({ length: 10, pattern: /[A-Za-z0-9]/ }),
+        firstName: faker.person.firstName(),
+        lastName: faker.person.lastName(),
+        address: faker.location.streetAddress(),
+        state: faker.location.state(),
+        city: faker.location.city(),
+        zipCode: faker.location.zipCode(),
+        mobile: faker.phone.number('+###########'),
+        days: data.signupData.days,
+        month: data.signupData.month,
+        year: data.signupData.year,
+        country: data.signupData.country
+      };
 
-        signup.visit();
-        signup.clickSignup();
-        signup.fillName(randomName);
-        signup.fillEmail(randomEmail);
-        signup.submit();
-        signup.clickRadio();
-        signup.fillPassword(randomPassword);
-        signup.fillDays('2');
-        signup.fillMonth('May');        
-        signup.fillYear('2018');
-        signup.fillFirstName(randomFirstName);
-        signup.fillLastName(randomLastName);
-        signup.fillAddress(randomAddress);
-        signup.fillCountry('Canada');
-        signup.fillState(randomState);
-        signup.fillCity(randomCity);
-        signup.fillZipCode(randomZipCode);
-        signup.fillMobileNumber(randomMobileNumber);
-        signup.createAccount();
-        signup.verification();
-        cy.xpath(signup.accountVerify).then(($el) => {
-            const message = $el.text();
-            console.log("Account Verification Message:", message);
-            cy.log("Account Verification Message: " + message);
-        });
+      // Save updated signupData to testData.json
+      data.signupData = signupData;
+      cy.writeFile('cypress/fixtures/testData.json', data);
 
-        signup.continueDashboard();
-        signup.accountLogin();
-        cy.xpath(signup.verifyLogin).then(($el) => {
-            const message = $el.text();
-            console.log("Account Verification Message:", message);
-            cy.log("Account Login Successfull: " + message + " is visible");
-        });
+      // Begin signup flow
+      signup.visit();
+      signup.clickSignup();
+      signup.fillName(signupData.name);
+      signup.fillEmail(signupData.email);
+      signup.submit();
+      signup.clickRadio();
+      signup.fillPassword(signupData.password);
+      signup.fillDays(signupData.days);
+      signup.fillMonth(signupData.month);
+      signup.fillYear(signupData.year);
+      signup.fillFirstName(signupData.firstName);
+      signup.fillLastName(signupData.lastName);
+      signup.fillAddress(signupData.address);
+      signup.fillCountry(signupData.country);
+      signup.fillState(signupData.state);
+      signup.fillCity(signupData.city);
+      signup.fillZipCode(signupData.zipCode);
+      signup.fillMobileNumber(signupData.mobile);
+      signup.createAccount();
+      signup.verification();
+      signup.continueDashboard();
+      signup.accountLogin();
 
+      // Verify that the dashboard shows the signed-up user's name
+      signup.verifyDashboardName(signupData.name);
     });
+  });
 });
