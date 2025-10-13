@@ -5,7 +5,7 @@ on:
     branches:
       - "**"
   schedule:                   # Run every day at 12:00 PM (noon) UTC
-    - cron: '0 12 * * *'
+    - cron: '0 0 * * *'
 
 jobs:
   cypress-run:
@@ -18,7 +18,7 @@ jobs:
       - name: Setup Node.js (use stable version for Cypress)
         uses: actions/setup-node@v4
         with:
-          node-version: 18.18.2   # ✅ Safe version before Node loader change
+          node-version: 18.18.2   
 
       - name: Install dependencies
         run: npm ci
