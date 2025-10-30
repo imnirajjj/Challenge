@@ -90,12 +90,7 @@ Installation
 
 Clone the repository:
 
-git clone https://github.com/imnirajjj/Intuji.git
-
-
-Navigate to the project folder:
-
-cd Intuji
+git clone https://github.com/imnirajjj/challenge.git
 
 
 Install dependencies:
